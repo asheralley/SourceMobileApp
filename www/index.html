@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>Blank App</title>
+    </head>
+    <body ng-app="MyApp">
+      <div ng-controller="ToDoCntrl">
+        <br />
+        <form ng-submit="ToDoApp()">
+          <input type="text" ng-model="ToDoInput" placeholder="Add Task" size="50"/>
+          <input type="submit" class="btn btn-success" value="Add ToDo" />
+        </form>
+        <br />
+        <div ng-repeat="x in ToDoList">
+          <input type="checkbox" ng-model="x.done"/>
+          <span ng-bind="x.ToDoText"></span>
+
+        </div>
+        <br />
+        <button class="btn btn-danger" ng-click="Remove()">Remove Completed Tasks</button>
+
+      </div>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+      <script type="text/javascript">
+        var app = angular.module('MyApp', []);
+
+        app.controller('ToDoCntrl', function ($scope) {
+
+        $scope.ToDoList = [{ ToDoText: 'Water the Garden', Done: false }, { ToDoText: 'Code all the things', Done: false }];
+
+        $scope.ToDoApp = function () {
+            $scope.ToDoList.push({ ToDoText: $scope.ToDoInput, done: false });
+            $scope.ToDoInput = '';
+        };
+
+        $scope.Remove = function () {
+            var TempList = $scope.ToDoList;
+            $scope.ToDoList = [];
+            angular.forEach(TempList, function (el) {
+              // if el.done = false
+              if (!el.done) {
+                  $scope.ToDoList.push(el);
+              }
+            })
+          };
+        });
+
+      </script>
+        
+      <script type="text/javascript" src="cordova.js"></script>
+    </body>
+</html>
