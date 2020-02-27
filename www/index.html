@@ -23,6 +23,7 @@
         <button class="btn btn-danger" ng-click="Remove()">Remove Completed Tasks</button>
 
       </div>
+      <script type="text/javascript" src="cordova.js"></script>
       <script type="text/javascript">
         var app = angular.module('MyApp', []);
 
@@ -43,12 +44,10 @@
               if (!el.done) {
                   $scope.ToDoList.push(el);
               }
-            })
+            });
           };
         });
 
       </script>
-        
-      <script type="text/javascript" src="cordova.js"></script>
     </body>
 </html>
